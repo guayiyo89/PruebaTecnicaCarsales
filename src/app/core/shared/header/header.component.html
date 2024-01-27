@@ -1,0 +1,42 @@
+<ng-container *ngIf="desktop; else mobile">
+  <div class="header">
+    <div class="container">
+      <div class="header-top">
+        <div class="header-col-1"><h1 class="title-header">rickymorty</h1></div>
+        <div class="header-col-1">
+          <div class="header-menu">
+            <div
+              *ngFor="let item of menu"
+              [routerLink]="[item.route]"
+              class="header-menu-el"
+            >
+              {{ item.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #mobile>
+  <div class="header">
+    <div class="row">
+      <div class="kol-10">
+        <h1 class="title-header">rickymorty</h1>
+      </div>
+      <div class="kol-2">
+        <button (click)="setMenuStatus()">///</button>
+      </div>
+    </div>
+  </div>
+  <div class="menuMobile" [ngClass]="{ showMenuMobile: !showMenuFlag }">
+    <div
+      *ngFor="let item of menu"
+      [routerLink]="[item.route]"
+      class="itemMobile"
+    >
+      {{ item.name }}
+    </div>
+  </div>
+</ng-template>
