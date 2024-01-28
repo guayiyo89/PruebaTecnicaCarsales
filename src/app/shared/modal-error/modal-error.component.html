@@ -1,0 +1,18 @@
+<div class="content-error">
+  <div class="icon-error">
+    <mat-icon class="warn" aria-hidden="false" fontIcon="warning"></mat-icon>
+  </div>
+
+  <p>
+    {{ data.mensaje }}
+  </p>
+
+  <button
+    [mat-dialog-close]="true"
+    mat-flat-button
+    color="primary"
+    style="margin-right: 8px"
+  >
+    Salir
+  </button>
+</div>

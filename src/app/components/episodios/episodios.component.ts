@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BaseEpisodio, Episodio } from 'src/app/core/interfaces/episodio';
 import { EpisodiosService } from 'src/app/core/services/episodios.service';
 import { ModalEpisodioComponent } from './modal-episodio/modal-episodio.component';
+import { ModalErrorComponent } from 'src/app/shared/modal-error/modal-error.component';
 
 @Component({
   selector: 'app-episodios',
@@ -22,10 +23,7 @@ export class EpisodiosComponent implements OnInit {
   filterText = new FormControl('');
   selectPage = new FormControl('');
 
-  constructor(
-    private episodioSvc: EpisodiosService,
-    public dialog: MatDialog
-  ) {
+  constructor(private episodioSvc: EpisodiosService, public dialog: MatDialog) {
     this.numPage = 1;
     this.totalPages = 1;
     this.totalResults = 0;
@@ -37,6 +35,49 @@ export class EpisodiosComponent implements OnInit {
   ngOnInit() {
     this.getEpisodiosByPage(this.numPage);
   }
+
+  getEpisodiosByPage(page: number) {
+    this.episodioSvc.getEpisodiosByPage(this.numPage).subscribe({
+      next: (res) => {
+        this.establecerData(res);
+        this.episodios = res.results;
+      },
+      error: (_err) => {
+        this.showError('Fallo de servicio.');
+      },
+    });
+  }
+
+  getEpisodioByLink(url: string) {
+    this.episodioSvc.getEpisodiosByLink(url).subscribe({
+      next: (res) => {
+        this.establecerData(res);
+        this.episodios = res.results;
+      },
+      error: (_err) => {
+        this.showError('Fallo de servicio.');
+      },
+    });
+  }
+
+  filterEpisodes() {
+    let texto = this.filterText.value!;
+    this.numPage = 1;
+    this.episodioSvc.getEpisodeByName(texto, 1).subscribe({
+      next: (res) => {
+        this.establecerData(res);
+        this.episodios = res.results;
+      },
+      error: (_err) => {
+        this.showError('No hay resultados asociados.');
+        this.reset();
+        this.evalNext();
+        this.evalPrev();
+      },
+    });
+  }
+
+  //=====================PAGINACION===============================
 
   nextPage() {
     this.numPage += 1;
@@ -53,72 +94,53 @@ export class EpisodiosComponent implements OnInit {
   }
 
   lastPage() {
-    this.getEpisodiosByPage(this.totalPages);
+    console.log(this.linkNextPage, this.linkPrevPage);
+    this.checkForLink(this.totalPages)
+    this.numPage = this.totalPages
+  }
+
+  firstPage() {
+    console.log(this.linkNextPage, this.linkPrevPage);
+    this.checkForLink(1)
+    this.numPage = 1
   }
 
   reset() {
-    this.numPage = 1
+    this.numPage = 1;
     this.getEpisodiosByPage(1);
   }
 
-  getEpisodiosByPage(page: number) {
-    this.episodioSvc.getEpisodiosByPage(this.numPage).subscribe({
-      next: (res) => {
-        this.establecerData(res)
-        this.episodios = res.results;
-      },
-      error: (_err) => {
-        console.log('fallo!');
-        //logica de falla
-      },
-    });
-  }
-
-  getEpisodioByLink(url: string) {
-    this.episodioSvc.getEpisodiosByLink(url).subscribe({
-      next: (res) => {
-        this.establecerData(res)
-        this.episodios = res.results;
-      },
-      error: (_err) => {
-        console.log('fallo!');
-        //logica de falla
-      },
-    });
-  }
-
-  filterEpisodes() {
-    let texto = this.filterText.value!;
-    this.numPage = 1
-    this.episodioSvc.getEpisodeByName(texto, 1).subscribe({
-      next: (res) => {
-        this.establecerData(res)
-        this.episodios = res.results;
-      },
-      error: (_err) => {
-        console.log('no hay resultados');
-        this.reset()
-        this.evalNext()
-        this.evalPrev()
-      },
-    });;
-  }
-
   goToPage() {
-      if(parseInt(this.selectPage.value!) >=1 && parseInt(this.selectPage.value!) <= this.totalPages ) {
-        let page = this.numPage + 1
-        let newPageLink = this.linkNextPage.replace(`page=${page}`, `page=${this.selectPage.value!}`)
-        if(!this.linkNextPage){
-          let page = this.numPage -1
-          newPageLink = this.linkPrevPage.replace(`page=${page}`, `page=${this.selectPage.value!}`)
-        } 
-        this.getEpisodioByLink(newPageLink)
-        this.numPage = parseInt(this.selectPage.value!)
+    if (
+      parseInt(this.selectPage.value!) >= 1 &&
+      parseInt(this.selectPage.value!) <= this.totalPages
+    ) {
+      this.checkForLink(this.selectPage.value!);
+      this.numPage = parseInt(this.selectPage.value!);
+    } else {
+      this.showError('Inserte un numero de página valido.');
+    }
+  }
 
-      } else {
-        console.log('inserte un numero de pafgina valido')
-      }
+  checkForLink(newPage: string | number) {
+    let newPageLink: string = '';
+    if (this.linkNextPage) {
+      let page = this.numPage + 1;
+      let newPageLink = this.getPageForLink(this.linkNextPage, page, newPage);
+      this.getEpisodioByLink(newPageLink);
+    } else {
+      let page = this.numPage - 1;
+      newPageLink = this.getPageForLink(this.linkPrevPage, page, newPage);
+      this.getEpisodioByLink(newPageLink);
+    }
+  }
 
+  getPageForLink(
+    linkPage: string,
+    actualPage: number,
+    newPage: string | number
+  ) {
+    return linkPage.replace(`page=${actualPage}`, `page=${newPage}`);
   }
 
   establecerData(result: BaseEpisodio) {
@@ -127,8 +149,8 @@ export class EpisodiosComponent implements OnInit {
     this.linkNextPage = result.info.next;
     this.linkPrevPage = result.info.prev;
 
-    this.evalNext()
-    this.evalPrev()
+    this.evalNext();
+    this.evalPrev();
   }
 
   evalNext() {
@@ -150,9 +172,14 @@ export class EpisodiosComponent implements OnInit {
   showEpisode(item: Episodio) {
     const dialogRef = this.dialog.open(ModalEpisodioComponent, {
       data: item,
-      width: '620px'
-    })
+      width: '620px',
+    });
   }
 
-
+  showError(mensaje: string) {
+    const dialogRef = this.dialog.open(ModalErrorComponent, {
+      data: { mensaje },
+      width: '620px',
+    });
+  }
 }
