@@ -15,11 +15,11 @@ export class HeaderComponent implements OnInit {
     },
     {
       name: 'Episodios',
-      route: '/buscar-pokemon'
+      route: '/episodios'
     },
     {
       name: 'Personajes',
-      route: '/pokepedia'
+      route: '/personajes'
     }
   ]
 
