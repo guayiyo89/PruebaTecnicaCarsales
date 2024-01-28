@@ -76,3 +76,42 @@ input[type=number] { -moz-appearance:textfield; }
   width: 44px;
   margin: 0 8px;
 }
+
+.arrow-btn {
+  min-width: 2px !important;
+}
+
+.mdc-button--unelevated, .mdc-button {
+  padding: 4px !important;
+}
+
+mat-icon {
+  margin: 0;
+  padding: 0 0 0 8px;
+}
+
+.titleModal {
+  width: 100%;
+  background-color: rgb(82, 168, 25);
+  height: 36px;
+  text-align: center;
+}
+
+.modal-title-text {
+  margin: 0;
+  color: rgb(72, 21, 114);
+  padding-top: 4px;
+  font-weight: 600;
+}
+
+.modal-content {
+  margin: 0 auto;
+  margin-top: 8px;
+  width: 85%;
+  margin-bottom: 8px;
+}
+
+.button-area {
+  margin-top: 8px;
+  text-align: right;
+}

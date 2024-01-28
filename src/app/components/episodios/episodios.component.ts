@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseEpisodio, Episodio } from 'src/app/core/interfaces/episodio';
 import { EpisodiosService } from 'src/app/core/services/episodios.service';
+import { ModalEpisodioComponent } from './modal-episodio/modal-episodio.component';
 
 @Component({
   selector: 'app-episodios',
@@ -23,7 +24,7 @@ export class EpisodiosComponent implements OnInit {
 
   constructor(
     private episodioSvc: EpisodiosService,
-    private dialog: MatDialog
+    public dialog: MatDialog
   ) {
     this.numPage = 1;
     this.totalPages = 1;
@@ -118,8 +119,6 @@ export class EpisodiosComponent implements OnInit {
         console.log('inserte un numero de pafgina valido')
       }
 
-    
-
   }
 
   establecerData(result: BaseEpisodio) {
@@ -147,4 +146,13 @@ export class EpisodiosComponent implements OnInit {
       this.disablePrev = false;
     }
   }
+
+  showEpisode(item: Episodio) {
+    const dialogRef = this.dialog.open(ModalEpisodioComponent, {
+      data: item,
+      width: '620px'
+    })
+  }
+
+
 }

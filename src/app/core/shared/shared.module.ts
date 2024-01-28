@@ -11,12 +11,12 @@ import { ModalErrorComponent } from './modal-error/modal-error.component';
 import { MaterialModule } from 'src/app/modules/material/material.module';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     FooterComponent,
     HeaderComponent,
     ModalErrorComponent,
-    NotFoundComponent
-  ],
+    NotFoundComponent,
+   ],
   imports: [
     MaterialModule,
     CommonModule,

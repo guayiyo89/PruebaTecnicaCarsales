@@ -29,19 +29,20 @@
       </button>
     </div>
 
-    <div class="item-result" *ngFor="let item of episodios">
+    <div class="item-result" *ngFor="let item of episodios" (click)="showEpisode(item)">
       <span class="item-code">{{ item.episode }}</span> |
       {{ item.name }}
     </div>
 
     <div class="pagination-zone">
       <button
+        class="arrow-btn"
         [disabled]="disablePrev"
         (click)="prevPage()"
         mat-flat-button
         color="primary"
       >
-        atras
+      <mat-icon aria-hidden="false" fontIcon="arrow_back"></mat-icon>
       </button>
 
       <input
@@ -55,12 +56,13 @@
       />
 
       <button
+        class="arrow-btn"
         [disabled]="disableNext"
         (click)="nextPage()"
         mat-flat-button
         color="primary"
       >
-        adelante
+      <mat-icon aria-hidden="false" fontIcon="arrow_forward"></mat-icon>
       </button>
 
       <span class="pagination">

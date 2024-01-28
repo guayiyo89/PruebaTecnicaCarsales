@@ -1,3 +1,28 @@
-<p>
-  modal-episodio works!
-</p>
+<div class="titleModal">
+  <h1 class="modal-title-text">{{ data.name }}</h1>
+</div>
+<div class="modal-content">
+  <div class="datoEpisodio">
+    <h4 class="datoEpisodio-title">Fecha de emisión</h4>
+    <p>
+      {{ data.air_date | fecha }}
+    </p>
+  </div>
+  <div class="datoEpisodio">
+    <h4 class="datoEpisodio-title">Código</h4>
+    <p>
+      {{ data.episode }}
+    </p>
+  </div>
+
+  <div class="button-area">
+    <button
+      [mat-dialog-close]="true"
+      mat-flat-button
+      color="primary"
+      style="margin-right: 8px"
+    >
+      Salir
+    </button>
+  </div>
+</div>

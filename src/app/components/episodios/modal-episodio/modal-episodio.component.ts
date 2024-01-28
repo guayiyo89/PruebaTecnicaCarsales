@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Episodio } from 'src/app/core/interfaces/episodio';
 
 @Component({
   selector: 'app-modal-episodio',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalEpisodioComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Episodio) { }
 
   ngOnInit() {
+    console.log(this.data)
   }
 
 }
