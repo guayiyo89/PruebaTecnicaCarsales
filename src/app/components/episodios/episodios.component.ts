@@ -37,10 +37,11 @@ export class EpisodiosComponent implements OnInit {
   }
 
   getEpisodiosByPage(page: number) {
-    this.episodioSvc.getEpisodiosByPage(this.numPage).subscribe({
+    this.episodioSvc.getEpisodiosByPage(page).subscribe({
       next: (res) => {
         this.establecerData(res);
         this.episodios = res.results;
+        this.selectPage.reset()
       },
       error: (_err) => {
         this.showError('Fallo de servicio.');
@@ -53,6 +54,7 @@ export class EpisodiosComponent implements OnInit {
       next: (res) => {
         this.establecerData(res);
         this.episodios = res.results;
+        this.selectPage.reset()
       },
       error: (_err) => {
         this.showError('Fallo de servicio.');
@@ -67,6 +69,7 @@ export class EpisodiosComponent implements OnInit {
       next: (res) => {
         this.establecerData(res);
         this.episodios = res.results;
+        this.selectPage.reset()
       },
       error: (_err) => {
         this.showError('No hay resultados asociados.');

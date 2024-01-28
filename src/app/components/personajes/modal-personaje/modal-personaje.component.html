@@ -1,3 +1,39 @@
-<p>
-  modal-personaje works!
-</p>
+<div class="titleModal">
+  <h1 class="modal-title-text">{{ data.name }}</h1>
+</div>
+<div class="modal-content">
+  <div class="row-modal">
+    <div class="col-modal">
+      <img [src]="data.image" alt="imagen" width="200px">
+    </div>
+    <div class="col-modal">
+      <div class="datoEpisodio w-100">
+        <h4 class="datoEpisodio-title">Estado</h4>
+        <span>{{ data.status }}</span>
+      </div>
+      <div class="datoEpisodio w-100">
+        <h4 class="datoEpisodio-title">Género</h4>
+        <span>{{ data.gender }}</span>
+      </div>
+      <div class="datoEpisodio w-100">
+        <h4 class="datoEpisodio-title">Origen</h4>
+        <span>{{ data.origin.name }}</span>
+      </div>
+      <div class="datoEpisodio w-100">
+        <h4 class="datoEpisodio-title">Lugar</h4>
+        <span>{{ data.location.name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-area">
+    <button
+      [mat-dialog-close]="true"
+      mat-flat-button
+      color="primary"
+      style="margin-right: 8px"
+    >
+      Salir
+    </button>
+  </div>
+</div>

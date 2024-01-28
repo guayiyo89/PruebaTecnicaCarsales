@@ -1,0 +1,16 @@
+.row-modal {
+    display: flex;
+    flex-direction: row;
+}
+
+.col-modal {
+    flex: 1
+}
+
+@media(max-width: 600px) {
+    .row-modal {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}

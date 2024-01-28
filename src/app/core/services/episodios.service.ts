@@ -28,9 +28,4 @@ constructor(private http: HttpClient) { }
     let url = `${URLS.episode}/?name=${name}&page=${page}`
     return this.http.get<BaseEpisodio>(url)
   }
-
-  getEpisodeByCode(code: string, page: number): Observable<BaseEpisodio> {
-    let url = `${URLS.episode}/?episode=${code}&page=${page}`
-    return this.http.get<BaseEpisodio>(url)
-  }
 }

@@ -1,0 +1,15 @@
+.busqueda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.select-state {
+    height: 28px;
+    margin: 12px 0 0 12px;
+}
+
+.select-state:focus {
+    outline: none;
+}
