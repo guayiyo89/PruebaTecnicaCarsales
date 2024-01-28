@@ -17,12 +17,12 @@ body {
 .item-result {
   width: 80%;
   padding-top: 8px;
-  height: 28px;
+  min-height: 28px;
   margin: 0 auto;
   align-items: center;
   font-size: 12pt;
   cursor: pointer;
-  border-bottom: 1px solid rgb(82, 168, 25);;
+  border-bottom: 1px solid rgb(82, 168, 25);
 }
 
 .item-code {

@@ -21,12 +21,19 @@
 
 <ng-template #mobile>
   <div class="header">
-    <div class="row">
-      <div class="kol-10">
+    <div class="row-header">
+      <div class="kol-header-title">
         <h1 class="title-header">rickymorty</h1>
       </div>
-      <div class="kol-2">
-        <button (click)="setMenuStatus()">///</button>
+      <div class="kol-header-button">
+        <button
+          (click)="setMenuStatus()"
+          mat-flat-button
+          color="primary"
+          style="margin-right: 8px"
+        >
+        <mat-icon aria-hidden="false"  fontIcon="menu"></mat-icon>
+        </button>
       </div>
     </div>
   </div>
