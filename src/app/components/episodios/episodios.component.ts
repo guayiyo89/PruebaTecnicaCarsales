@@ -56,6 +56,7 @@ export class EpisodiosComponent implements OnInit {
   }
 
   reset() {
+    this.numPage = 1
     this.getEpisodiosByPage(1);
   }
 
@@ -87,6 +88,7 @@ export class EpisodiosComponent implements OnInit {
 
   filterEpisodes() {
     let texto = this.filterText.value!;
+    this.numPage = 1
     this.episodioSvc.getEpisodeByName(texto, 1).subscribe({
       next: (res) => {
         this.establecerData(res)
@@ -94,9 +96,30 @@ export class EpisodiosComponent implements OnInit {
       },
       error: (_err) => {
         console.log('no hay resultados');
-        //logica de falla
+        this.reset()
+        this.evalNext()
+        this.evalPrev()
       },
     });;
+  }
+
+  goToPage() {
+      if(parseInt(this.selectPage.value!) >=1 && parseInt(this.selectPage.value!) <= this.totalPages ) {
+        let page = this.numPage + 1
+        let newPageLink = this.linkNextPage.replace(`page=${page}`, `page=${this.selectPage.value!}`)
+        if(!this.linkNextPage){
+          let page = this.numPage -1
+          newPageLink = this.linkPrevPage.replace(`page=${page}`, `page=${this.selectPage.value!}`)
+        } 
+        this.getEpisodioByLink(newPageLink)
+        this.numPage = parseInt(this.selectPage.value!)
+
+      } else {
+        console.log('inserte un numero de pafgina valido')
+      }
+
+    
+
   }
 
   establecerData(result: BaseEpisodio) {

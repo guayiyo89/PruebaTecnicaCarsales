@@ -2,7 +2,7 @@
   <div class="content">
     <div class="text-centered">
       <input
-        class="campo-buscar"
+        class="campo-buscar w-100"
         placeholder="Buscar episodio por nombre"
         type="text"
         id="filterText"
@@ -43,6 +43,17 @@
       >
         atras
       </button>
+
+      <input
+        class="campo-buscar num-pagina"
+        placeholder="pag"
+        type="number"
+        id="selectPage"
+        style="width: 20px;"
+        [formControl]="selectPage"
+        (keyup.enter)="goToPage()"
+      />
+
       <button
         [disabled]="disableNext"
         (click)="nextPage()"
