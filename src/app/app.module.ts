@@ -7,14 +7,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { SharedModule } from './core/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { EpisodiosComponent } from './components/episodios/episodios.component';
+import { PersonajesComponent } from './components/personajes/personajes.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EpisodiosComponent,
+    PersonajesComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     SharedModule,
     MaterialModule,

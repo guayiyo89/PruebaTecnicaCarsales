@@ -15,6 +15,10 @@ constructor(private http: HttpClient) { }
     return this.http.get<BaseEpisodio>(url)
   }
 
+  getEpisodiosByLink(link: string): Observable<BaseEpisodio> {
+    return this.http.get<BaseEpisodio>(link)
+  }
+
   getEpisodio(id:number): Observable<Episodio> {
     let url = `${URLS.episode}/${id}`
     return this.http.get<Episodio>(url)

@@ -1,3 +1,61 @@
-<p>
-  episodios works!
-</p>
+<div class="container">
+  <div class="content">
+    <div class="text-centered">
+      <input
+        class="campo-buscar"
+        placeholder="Buscar episodio por nombre"
+        type="text"
+        id="filterText"
+        [formControl]="filterText"
+        (keyup.enter)="filterEpisodes()"
+      />
+    </div>
+
+    <div class="pagination-zone">
+      <button
+        (click)="filterEpisodes()"
+        mat-flat-button
+        color="primary"
+        style="margin-right: 8px;"
+      >
+        Buscar
+      </button>
+      <button
+        (click)="reset()"
+        mat-flat-button
+        color="primary"
+      >
+        Reestablecer
+      </button>
+    </div>
+
+    <div class="item-result" *ngFor="let item of episodios">
+      <span class="item-code">{{ item.episode }}</span> |
+      {{ item.name }}
+    </div>
+
+    <div class="pagination-zone">
+      <button
+        [disabled]="disablePrev"
+        (click)="prevPage()"
+        mat-flat-button
+        color="primary"
+      >
+        atras
+      </button>
+      <button
+        [disabled]="disableNext"
+        (click)="nextPage()"
+        mat-flat-button
+        color="primary"
+      >
+        adelante
+      </button>
+
+      <span class="pagination">
+        pag <strong>{{ numPage }}</strong> de
+        <strong>{{ totalPages }}</strong></span
+      >
+    </div>
+  </div>
+</div>

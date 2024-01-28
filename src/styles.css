@@ -13,3 +13,51 @@ body {
     justify-content: center;
     max-width: 720px !important;
 }
+
+.item-result {
+  width: 80%;
+  padding-top: 8px;
+  height: 28px;
+  margin: 0 auto;
+  align-items: center;
+  font-size: 12pt;
+  cursor: pointer;
+  border-bottom: 1px solid rgb(82, 168, 25);;
+}
+
+.item-code {
+  color: rgb(72, 21, 114);
+  font-weight: 500;
+}
+
+.item-result:hover {
+  background-color: rgb(193, 228, 170);
+}
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagination {
+  font-size: 9pt;
+}
+
+.pagination-zone {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.campo-buscar {
+  border: none;
+  border-bottom: 1px solid rgb(82, 168, 25);
+  height: 25px;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.campo-buscar:focus {
+  outline: none;
+  border: none;
+  border-bottom: 2px solid rgb(72, 21, 114);
+
+}
